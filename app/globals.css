@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+/* Загрузка кастомных шрифтов */
+@font-face {
+  font-family: 'Dela Gothic One';
+  src: url('/fonts/DelaGothicOne-Regular.woff2') format('woff2'),
+       url('/fonts/DelaGothicOne-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Yanone Kaffeesatz';
+  src: url('/fonts/YanoneKaffeesatz-Regular.woff2') format('woff2'),
+       url('/fonts/YanoneKaffeesatz-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Фон для всего документа */
+html, body {
+  font-family: var(--font-primary) !important;
+  background: url('/wave-background.svg') no-repeat center center fixed !important;
+  background-size: cover !important;
+  background-color: transparent !important;
+  min-height: 100vh;
+}
+
+/* Специфичный фон для главной страницы */
+.page-home {
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headings) !important;
+}
+
+/* Глобальное переопределение всех элементов */
+* {
+  font-family: inherit;
+}
+
+/* Принудительное переопределение MUI компонентов */
+.MuiButton-root,
+.MuiTypography-root,
+.MuiCard-root,
+.MuiPaper-root,
+.MuiChip-root,
+.MuiMenuItem-root,
+.MuiListItem-root,
+.MuiInput-root,
+.MuiFormLabel-root,
+.MuiTab-root,
+.MuiAppBar-root {
+  font-family: var(--font-primary) !important;
+}
+
+/* Заголовки MUI */
+.MuiTypography-root.MuiTypography-h1,
+.MuiTypography-root.MuiTypography-h2,
+.MuiTypography-root.MuiTypography-h3,
+.MuiTypography-root.MuiTypography-h4,
+.MuiTypography-root.MuiTypography-h5,
+.MuiTypography-root.MuiTypography-h6 {
+  font-family: var(--font-headings) !important;
+}
+
+/* Переопределение через data-атрибуты MUI */
+[data-testid*="Mui"],
+[data-qa*="Mui"],
+[class*="Mui"] {
+  font-family: var(--font-primary) !important;
+}
+
+[class*="MuiTypography-h"] {
+  font-family: var(--font-headings) !important;
+}
+
+:root {
+  /* Шрифты */
+  --font-primary: 'Yanone Kaffeesatz', sans-serif;
+  --font-headings: 'Dela Gothic One', sans-serif;
+
+  /* Цветовая палитра Animeshka */
+  --primary-900: #25274D;  /* Самый темный - для глубокого фона */
+  --primary-800: #464866;  /* Темный - основной фон */
+  --primary-700: #AAABB8;  /* Средний серый - для карточек */
+  --primary-600: #29648A;  /* Темно-синий - для текста */
+  --primary-500: #2E9CCA;  /* Ярко-синий - для акцентов */
+  --primary-400: #2E9CCA;  /* Синий - для активных элементов */
+  --primary-300: #AAABB8;  /* Светло-серый - для дополнительных элементов */
+
+}
+
+/* Применяем цвета через произвольные классы Tailwind */
+.bg-primary-900 { background-color: var(--primary-900); }
+.bg-primary-800 { background-color: var(--primary-800); }
+.bg-primary-700 { background-color: var(--primary-700); }
+.text-primary-900 { color: var(--primary-900); }
+.text-primary-800 { color: var(--primary-800); }
+.text-primary-700 { color: var(--primary-700); }
+.text-primary-600 { color: var(--primary-600); }
+.text-primary-500 { color: var(--primary-500); }
+.text-primary-400 { color: var(--primary-400); }
+.text-primary-300 { color: var(--primary-300); }
+.border-primary-900 { border-color: var(--primary-900); }
+.border-primary-800 { border-color: var(--primary-800); }
+.border-primary-700 { border-color: var(--primary-700); }
+.border-primary-600 { border-color: var(--primary-600); }
+.border-primary-500 { border-color: var(--primary-500); }
+.border-primary-400 { border-color: var(--primary-400); }
+.border-primary-300 { border-color: var(--primary-300); }
+
+/* Анимированный лоадер для видео */
+.loader {
+  height: 150px;
+  width: 100px;
+  border-radius: 55px 55px 10px 10px;
+  position: relative;
+  background: #FF3D00;
+  background-image: linear-gradient(0deg,
+    #f63a99 25%,
+    #30dcf6 25%,
+    #30dcf6 25%,
+    #30dcf6 50%,
+    #f2d200 50%,
+    #f2d200 50%,
+    #f2d200 75%,
+    #70ca5c 75%);
+  background-position: 0px 0px;
+  background-size: auto 175px;
+  background-repeat: repeat-y;
+  animation: colorShift 6s linear infinite;
+}
+
+.loader:before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  bottom: 15px;
+  width: 15px;
+  height: 100px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.loader:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50% , 0);
+  box-shadow: 0 15px 2px rgba(0, 0, 0, 0.25) inset;
+  width: 32px;
+  height: 45px;
+  background: #E09C5F;
+  border-radius: 0 0 12px 12px;
+}
+
+@keyframes colorShift {
+  to { background-position: 0 175px; }
+}
