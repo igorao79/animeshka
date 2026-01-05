@@ -370,7 +370,11 @@ export default function AnimePlayer({ anime }: AnimePlayerProps) {
                 backgroundColor: 'black',
                 margin: 0,
                 padding: 0
-              } : { aspectRatio: '16/9' },
+              } : {
+                width: '100%',
+                height: '700px',
+                objectFit: 'cover'
+              },
               cursor: controlsVisible ? 'default' : 'none'
             }}
             onMouseMove={showControls}
@@ -386,7 +390,7 @@ export default function AnimePlayer({ anime }: AnimePlayerProps) {
                   setEpisodesMenuOpen(false); // Закрыть меню эпизодов
                 }}
                 sx={{
-                  color: 'white',
+                  color: 'var(--white)',
                   backgroundColor: seasonsMenuOpen ? 'rgba(46, 156, 202, 0.3)' : 'rgba(0,0,0,0.5)',
                   '&:hover': { backgroundColor: seasonsMenuOpen ? 'rgba(46, 156, 202, 0.4)' : 'rgba(0,0,0,0.7)' },
                   px: 2,
@@ -407,7 +411,7 @@ export default function AnimePlayer({ anime }: AnimePlayerProps) {
                   setSeasonsMenuOpen(false); // Закрыть меню сезонов
                 }}
                 sx={{
-                  color: 'white',
+                  color: 'var(--white)',
                   backgroundColor: episodesMenuOpen ? 'rgba(46, 156, 202, 0.3)' : 'rgba(0,0,0,0.5)',
                   '&:hover': { backgroundColor: episodesMenuOpen ? 'rgba(46, 156, 202, 0.4)' : 'rgba(0,0,0,0.7)' },
                   px: 2,
@@ -492,7 +496,7 @@ export default function AnimePlayer({ anime }: AnimePlayerProps) {
               }}
             >
               <Box sx={{ p: 2 }}>
-                <Typography variant="subtitle2" sx={{ color: '#2E9CCA', mb: 1, fontWeight: 'bold' }}>
+                <Typography variant="subtitle2" sx={{ color: 'var(--primary-500)', mb: 1, fontWeight: 'bold' }}>
                   Сезон {currentSeason.number}
                 </Typography>
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
@@ -530,7 +534,7 @@ export default function AnimePlayer({ anime }: AnimePlayerProps) {
           <video
             ref={videoRef}
             src={videoSrc || undefined}
-            className={`relative z-10 ${isFullscreen ? 'absolute inset-0 w-full h-full' : 'w-full h-auto min-h-[400px] object-cover'}`}
+            className={`relative z-10 ${isFullscreen ? 'absolute inset-0 w-full h-full' : 'w-full h-[700px] object-cover'}`}
             onClick={togglePlay}
             preload="metadata"
             poster={anime.poster}
@@ -540,7 +544,11 @@ export default function AnimePlayer({ anime }: AnimePlayerProps) {
               objectFit: 'cover',
               width: '100vw',
               height: '100dvh'
-            } : { aspectRatio: '16/9' }}
+            } : {
+              width: '100%',
+              height: '700px',
+              objectFit: 'cover'
+            }}
           >
             Ваш браузер не поддерживает видео.
           </video>
@@ -604,7 +612,7 @@ export default function AnimePlayer({ anime }: AnimePlayerProps) {
                     right: 0,
                     p: 2,
                     background: 'linear-gradient(to top, rgba(0,0,0,0.9), transparent)',
-                    color: 'white',
+                    color: 'var(--white)',
                     zIndex: 60,
                   }}
                 >

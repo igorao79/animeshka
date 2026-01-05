@@ -62,7 +62,7 @@ export default function AnimeCard({ anime }: AnimeCardProps) {
             variant="h6"
             component="h3"
             sx={{
-              color: 'white',
+              color: 'var(--white)',
               fontWeight: 600,
               mb: 1,
               display: '-webkit-box',

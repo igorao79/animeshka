@@ -1,0 +1,27 @@
+{
+  "name": "Animeshka - Просмотр Аниме",
+  "short_name": "Animeshka",
+  "description": "Платформа для просмотра аниме с оффлайн поддержкой",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#25274D",
+  "theme_color": "#2E9CCA",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/logoanimeshka.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logoanimeshka.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["entertainment", "media"],
+  "lang": "ru"
+}

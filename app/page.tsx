@@ -31,25 +31,10 @@ export default function Home() {
     fetchAnime();
   }, []);
 
-  if (loading) {
-    return (
-      <Container maxWidth="xl" sx={{ py: 4 }}>
-        <Box sx={{ mb: 4 }}>
-          <Typography variant="h1" component="h1" gutterBottom>
-            Доступные аниме
-          </Typography>
-        </Box>
-        <Box sx={{ textAlign: 'center', py: 8 }}>
-          <Typography variant="h6">Загрузка...</Typography>
-        </Box>
-      </Container>
-    );
-  }
-
   return (
-      <Container maxWidth="xl" sx={{ py: 4 }}>
+    <Container maxWidth="lg" sx={{ py: 4 }}>
         <Box sx={{ mb: 4 }}>
-          <Typography variant="h2" component="h1" gutterBottom>
+          <Typography variant="h3" component="h1" gutterBottom>
             Доступные аниме
           </Typography>
           <Typography variant="h5" color="text.secondary">
@@ -57,7 +42,11 @@ export default function Home() {
           </Typography>
         </Box>
 
-        {anime.length > 0 ? (
+      {loading ? (
+        <Box sx={{ textAlign: 'center', py: 8 }}>
+          <Typography variant="h6">Загрузка...</Typography>
+        </Box>
+      ) : anime.length > 0 ? (
           <Box
             sx={{
               display: 'grid',
