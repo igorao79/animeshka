@@ -163,21 +163,7 @@ h1, h2, h3, h4, h5, h6 {
   to { background-position: 0 175px; }
 }
 
-/* Плавные переходы страниц */
-.page-transition {
-  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* Плавные переходы страниц теперь обрабатываются framer-motion */
 
 /* View Transitions API для плавных переходов между страницами */
 ::view-transition-old(root) {

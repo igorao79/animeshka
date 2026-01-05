@@ -3,6 +3,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import "./globals.css";
 import Navigation from "../components/Navigation";
 import FontProvider from "../components/FontProvider";
+import PageTransition from "../components/PageTransition";
 import { Suspense } from 'react';
 
 export const metadata: Metadata = {
@@ -32,9 +33,9 @@ export default function RootLayout({
               <div>Загрузка...</div>
             </div>
           }>
-            <main className="flex-1 page-transition">
+            <PageTransition>
               {children}
-            </main>
+            </PageTransition>
           </Suspense>
         </FontProvider>
       </body>
