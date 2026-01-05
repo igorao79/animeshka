@@ -48,3 +48,6 @@ public/*.mov
 public/*.wmv
 public/*.flv
 public/*.webm
+
+# animeshka server folder
+animeshka/

@@ -3,20 +3,20 @@ import { createTheme } from '@mui/material/styles';
 export const theme = createTheme({
   palette: {
     primary: {
-      main: '#2E9CCA', // Основной синий
-      dark: '#29648A', // Темно-синий
-      light: '#AAABB8', // Светло-серый
+      main: '#4A9FD1', // Светло-синий (был #2E9CCA)
+      dark: '#3A7CA5', // Средне-синий (был #29648A)
+      light: '#E0E0E0', // Почти белый (был #AAABB8)
     },
     secondary: {
-      main: '#464866', // Средний темный
+      main: '#5A5F7A', // Светло-серый (был #464866)
     },
     background: {
-      default: '#25274D', // Самый темный - основной фон
-      paper: '#464866', // Карточки и панели
+      default: '#3A3D5C', // Светлее (был #25274D)
+      paper: '#5A5F7A', // Светлее (был #464866)
     },
     text: {
-      primary: '#AAABB8', // Основной текст
-      secondary: '#2E9CCA', // Вторичный текст
+      primary: '#E0E0E0', // Почти белый (был #AAABB8)
+      secondary: '#4A9FD1', // Светло-синий (был #2E9CCA)
     },
   },
   typography: {
@@ -57,8 +57,8 @@ export const theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          backgroundColor: '#25274D',
-          color: '#AAABB8',
+          backgroundColor: '#3A3D5C',
+          color: '#E0E0E0',
         },
       },
     },

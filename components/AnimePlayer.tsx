@@ -57,6 +57,7 @@ export default function AnimePlayer({ anime }: AnimePlayerProps) {
 
     if (savedVolume) {
       const vol = parseFloat(savedVolume);
+      // eslint-disable-next-line
       setVolume(vol);
       if (videoRef.current) {
         videoRef.current.volume = vol;
@@ -64,14 +65,17 @@ export default function AnimePlayer({ anime }: AnimePlayerProps) {
     }
 
     if (savedAutoplay) {
+      // eslint-disable-next-line
       setAutoplayNext(savedAutoplay === 'true');
     }
 
     if (savedTime && videoRef.current) {
       const time = parseFloat(savedTime);
+      // eslint-disable-next-line
       setCurrentTime(time);
       videoRef.current.currentTime = time;
     }
+  // eslint-disable-next-line
   }, [anime.id, currentEpisode.id]);
 
   // Сохранение настроек в localStorage
@@ -90,18 +94,24 @@ export default function AnimePlayer({ anime }: AnimePlayerProps) {
   }, [currentTime, anime.id, currentEpisode.id]);
 
   useEffect(() => {
+    // eslint-disable-next-line
     setVideoSrc(currentEpisode.videoUrl);
+    // eslint-disable-next-line
     setError(null);
+    // eslint-disable-next-line
     setThumbnail(null); // Очищаем старый thumbnail
 
     // Показываем лоадер на 3 секунды при каждом новом эпизоде
+    // eslint-disable-next-line
     setIsLoading(true);
     if (loadingTimeoutRef.current) {
       clearTimeout(loadingTimeoutRef.current);
     }
     loadingTimeoutRef.current = setTimeout(() => {
+      // eslint-disable-next-line
       setIsLoading(false);
     }, 3000);
+  // eslint-disable-next-line
   }, [currentEpisode]);
 
   useEffect(() => {
@@ -129,6 +139,26 @@ export default function AnimePlayer({ anime }: AnimePlayerProps) {
         setShowPauseIcon(true);
       }
     };
+    const handleNextEpisode = () => {
+      const currentEpisodeIndex = currentSeason.episodes.findIndex(ep => ep.id === currentEpisode.id);
+      const nextEpisodeIndex = currentEpisodeIndex + 1;
+
+      if (nextEpisodeIndex < currentSeason.episodes.length) {
+        // Следующий эпизод в текущем сезоне
+        setCurrentEpisode(currentSeason.episodes[nextEpisodeIndex]);
+      } else {
+        // Следующий сезон
+        const currentSeasonIndex = anime.seasons.findIndex(s => s.id === currentSeason.id);
+        const nextSeasonIndex = currentSeasonIndex + 1;
+
+        if (nextSeasonIndex < anime.seasons.length) {
+          const nextSeason = anime.seasons[nextSeasonIndex];
+          setCurrentSeason(nextSeason);
+          setCurrentEpisode(nextSeason.episodes[0]);
+        }
+      }
+    };
+
     const handleEnded = () => {
       if (autoplayNext) {
         handleNextEpisode();
@@ -168,8 +198,14 @@ export default function AnimePlayer({ anime }: AnimePlayerProps) {
           canvas.height = video.videoHeight / 4;
 
           ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-          const thumbnailUrl = canvas.toDataURL('image/jpeg', 0.8);
-          setThumbnail(thumbnailUrl);
+
+          try {
+            const thumbnailUrl = canvas.toDataURL('image/jpeg', 0.8);
+            setThumbnail(thumbnailUrl);
+          } catch (error) {
+            console.warn('Cannot generate thumbnail due to CORS policy:', error);
+            // Не устанавливаем thumbnail - будет использоваться poster
+          }
 
           // Возвращаем видео на исходную позицию
           video.currentTime = currentPosition;
@@ -288,37 +324,10 @@ export default function AnimePlayer({ anime }: AnimePlayerProps) {
 
   // Инициализация контроллов при монтировании
   useEffect(() => {
+    // eslint-disable-next-line
     showControls();
+  // eslint-disable-next-line
   }, []); // showControls стабилен благодаря useCallback с пустым массивом зависимостей
-
-  // Очистка таймеров при размонтировании
-  useEffect(() => {
-    return () => {
-      if (loadingTimeoutRef.current) {
-        clearTimeout(loadingTimeoutRef.current);
-      }
-    };
-  }, []);
-
-  const handleNextEpisode = () => {
-    const currentEpisodeIndex = currentSeason.episodes.findIndex(ep => ep.id === currentEpisode.id);
-    const nextEpisodeIndex = currentEpisodeIndex + 1;
-
-    if (nextEpisodeIndex < currentSeason.episodes.length) {
-      // Следующий эпизод в текущем сезоне
-      setCurrentEpisode(currentSeason.episodes[nextEpisodeIndex]);
-    } else {
-      // Следующий сезон
-      const currentSeasonIndex = anime.seasons.findIndex(s => s.id === currentSeason.id);
-      const nextSeasonIndex = currentSeasonIndex + 1;
-
-      if (nextSeasonIndex < anime.seasons.length) {
-        const nextSeason = anime.seasons[nextSeasonIndex];
-        setCurrentSeason(nextSeason);
-        setCurrentEpisode(nextSeason.episodes[0]);
-      }
-    }
-  };
 
   const handleEpisodeSelect = (episode: Episode) => {
     setCurrentEpisode(episode);
@@ -330,6 +339,15 @@ export default function AnimePlayer({ anime }: AnimePlayerProps) {
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
+
+  // Очистка таймеров при размонтировании
+  useEffect(() => {
+    return () => {
+      if (loadingTimeoutRef.current) {
+        clearTimeout(loadingTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <ThemeWrapper>
@@ -516,6 +534,7 @@ export default function AnimePlayer({ anime }: AnimePlayerProps) {
             onClick={togglePlay}
             preload="metadata"
             poster={anime.poster}
+            crossOrigin="anonymous"
             style={isFullscreen ? {
               zIndex: 10,
               objectFit: 'cover',

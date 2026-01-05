@@ -1,6 +1,6 @@
 'use client';
 
-import { Container, Typography, Grid, Box, Alert } from '@mui/material';
+import { Container, Typography, Box, Alert } from '@mui/material';
 import AnimeCard from '../../components/AnimeCard';
 import { mockAnime } from '../../data/mockAnime';
 
@@ -15,10 +15,10 @@ export default function WatchedPage() {
   return (
       <Container maxWidth="xl" sx={{ py: 4 }}>
         <Box sx={{ mb: 4 }}>
-          <Typography variant="h1" component="h1" gutterBottom>
+          <Typography variant="h3" component="h1" gutterBottom>
             Просмотренные аниме
           </Typography>
-          <Typography variant="h6" color="text.secondary">
+          <Typography variant="h5" color="text.secondary">
             Ваша история просмотров
           </Typography>
         </Box>
